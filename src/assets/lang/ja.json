@@ -1,0 +1,8 @@
+{
+  "layout": {},
+  "pages": {
+    "index": {
+      "greeting": "Hello World!!"
+    }
+  }
+}
