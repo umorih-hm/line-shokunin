@@ -1,5 +1,8 @@
 {
   "layout": {
+    "header": {
+      "title": "L I N E 職 人"
+    },
     "footer": {
       "menus": {
         "home": "ホーム",
@@ -9,8 +12,13 @@
     }
   },
   "pages": {
-    "index": {
-      "greeting": "Hello World!!"
+    "users": {
+      "index": {
+        "post_list": "過去の投稿一覧"
+      }
     }
+  },
+  "button": {
+    "post": "ラジオに投稿する"
   }
 }

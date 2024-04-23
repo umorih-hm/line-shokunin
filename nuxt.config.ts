@@ -10,6 +10,12 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: process.env.APP_NAME,
+      link: [
+        {
+          rel: "stylesheet",
+          href: "https://fonts.googleapis.com/css2?family=Zen+Kurenaido&display=swap"
+        },
+      ]
     },
   },
   modules: ['@nuxtjs/i18n',],

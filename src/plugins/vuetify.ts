@@ -13,6 +13,17 @@ export default defineNuxtPlugin((nuxtApp) => {
     components: {
       ...components,
     },
+    theme: {
+      themes: {
+        light: {
+          dark: false,
+          colors: {
+            green: '#06C755',
+            red: '#C51F1F'
+          }
+        },
+      },
+    },
     icons: {
       iconfont: 'mdi', // default - only for display purposes
     },
