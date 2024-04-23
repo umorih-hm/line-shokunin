@@ -1,5 +1,16 @@
 <template lang="pug">
-h1 {{$t('pages.index.greeting')}}
+// 初期化ローディング
+v-container.fit-display(fluid)
+  v-card.d-flex.justify-center.align-center(
+    color="#00000000"
+    height="90vh"
+    variant="flat"
+  )
+    v-progress-circular(
+      color="primary"
+      size="60"
+      indeterminate
+    )
 
 </template>
 
