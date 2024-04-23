@@ -1,7 +1,7 @@
 <template lang="pug">
 v-app
   v-main.bg-grey-lighten-5
-    v-container.app-container
+    v-container.h-100
       v-row.ma-0(justify="center")
         v-col.app-col
           slot
@@ -32,4 +32,8 @@ const footerMenus = [
 </script>
 
 <style scoped lang="sass">
+.app-col
+  max-width: 600px
+  padding-left: 0
+  padding-right: 0
 </style>
