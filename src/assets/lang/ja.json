@@ -14,7 +14,8 @@
   "pages": {
     "users": {
       "index": {
-        "post_list": "過去の投稿一覧"
+        "post_list": "過去の投稿一覧",
+        "theme_list": "募集中のメールテーマ"
       }
     }
   },
