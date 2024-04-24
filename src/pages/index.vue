@@ -1,9 +1,8 @@
 <template lang="pug">
 // 初期化ローディング
 v-container.fit-display(fluid)
-  v-card.d-flex.justify-center.align-center(
+  v-card.h-100.d-flex.justify-center.align-center(
     color="#00000000"
-    height="90vh"
     variant="flat"
   )
     v-progress-circular(

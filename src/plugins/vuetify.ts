@@ -19,7 +19,8 @@ export default defineNuxtPlugin((nuxtApp) => {
           dark: false,
           colors: {
             green: '#06C755',
-            red: '#C51F1F'
+            red: '#C51F1F',
+            grey: '#787878'
           }
         },
       },

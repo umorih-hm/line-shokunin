@@ -1,17 +1,24 @@
 <template lang="pug">
 v-container
-  v-row(justify="center")
-    v-col
+  // ラジオに投稿する
+  v-row
+    v-col.d-flex.flex-row.justify-center
       v-btn.post-button__title(
         color="green"
         rounded="pill"
         height="100px"
+        :to="`/users/${lineId}/form`"
       ) {{ $t('button.post') }}
+  // 過去の投稿一覧
   v-row
-    p.text-center {{ $t('pages.users.index.post_list') }}
+    v-col
+      p.text-center {{ $t('pages.users.index.post_list') }}
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const lineId = useState('lineId', () => '')
+lineId.value = 1
+</script>
 
 <style scoped lang="sass">
 .post-button__title
