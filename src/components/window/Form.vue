@@ -1,5 +1,5 @@
 <template lang="pug">
-v-card(
+v-card.overflow-y-auto(
   width="100vw"
   height="100vh"
 )
