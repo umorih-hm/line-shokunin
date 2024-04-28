@@ -16,6 +16,11 @@
       "index": {
         "post_list": "過去の投稿一覧",
         "theme_list": "募集中のメールテーマ"
+      },
+      "form": {
+        "mail_theme": "メールテーマ",
+        "content": "本文",
+        "attachment": "添付ファイル"
       }
     }
   },
