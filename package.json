@@ -19,6 +19,7 @@
   "devDependencies": {
     "@mdi/font": "^7.4.47",
     "@nuxtjs/i18n": "^8.3.0",
+    "@tryfabric/martian": "^1.2.4",
     "dayjs": "^1.11.10",
     "pug": "^3.0.2",
     "sass": "^1.75.0",

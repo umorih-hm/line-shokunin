@@ -78,9 +78,9 @@ const contentArea = ref()
 
 // methods
 const submit = () => {
-  console.log('test')
-  dialog.value.sendForm = false
-  navigateTo(`/users/${lineId}`)
+  // dialog.value.sendForm = false
+  // navigateTo(`/users/${lineId}`)
+  const block = useMdToNotion(content.value)
 }
 
 onMounted(async () => {
