@@ -64,29 +64,17 @@ dialog-send-form(
 
 <script setup lang="ts">
 import type EasyMde from "easymde"
+let mde: InstanceType<typeof EasyMde> | null = null
 
 const route = useRoute()
 const lineId = route.params.id
 
+// ref
 const dialog = ref({
   sendForm: false
 })
-
-let mde: InstanceType<typeof EasyMde> | null = null
 const content = ref("")
 const contentArea = ref()
-
-onMounted(async () => {
-  const EasyMde = (await import("easymde")).default
-  mde = new EasyMde({
-    element: contentArea.value.$el,
-  })
-  mde.codemirror.on("change", () => {
-    if (mde) {
-      content.value = mde.value()
-    }
-  })
-})
 
 // methods
 const submit = () => {
@@ -94,6 +82,24 @@ const submit = () => {
   dialog.value.sendForm = false
   navigateTo(`/users/${lineId}`)
 }
+
+onMounted(async () => {
+  // easeMde の初期化
+  const EasyMde = (await import("easymde")).default
+  mde = new EasyMde({
+    element: contentArea.value.$el,
+    autosave: {            //自動保存
+      enabled: true,
+      delay: 1000,
+      uniqueId: 'mde-autosave-demo' //ローカルストレージのキーに使用
+    },
+  })
+  mde.codemirror.on("change", () => {
+    if (mde) {
+      content.value = mde.value()
+    }
+  })
+})
 </script>
 
 <style scoped lang="sass">
