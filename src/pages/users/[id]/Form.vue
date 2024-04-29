@@ -4,7 +4,7 @@ v-container.py-0
     // メールテーマ
     v-col(cols="12")
       div.bg-red.rounded-pill.ma-auto.text-center.form-title(
-        style="height: 30px; width: 70vw; max-width: 400px;"
+        style="height: 30px width: 70vw max-width: 400px"
       ) {{ $t('pages.users.form.mail_theme') }}
     v-col(cols="12")
       v-select(
@@ -18,12 +18,22 @@ v-container.py-0
     // 本文
     v-col(cols="12")
       div.bg-red.rounded-pill.ma-auto.text-center.form-title(
-        style="height: 30px; width: 70vw; max-width: 400px;"
+        style="height: 30px width: 70vw max-width: 400px"
       ) {{ $t('pages.users.form.content') }}
+    v-col(cols="12")
+      div
+        textarea(
+          ref="contentArea"
+          v-model="content"
+          rows="5"
+          placeholder="markdown形式で説明を記述できます"
+          maxlength="300"
+        )
+
     // 添付ファイル
     v-col(cols="12")
       div.bg-red.rounded-pill.ma-auto.text-center.form-title(
-        style="height: 30px; width: 70vw; max-width: 400px;"
+        style="height: 30px width: 70vw max-width: 400px"
       ) {{ $t('pages.users.form.attachment') }}
     v-col(cols="12")
       v-file-input(
@@ -53,11 +63,29 @@ dialog-send-form(
 </template>
 
 <script setup lang="ts">
+import type EasyMde from "easymde"
+
 const route = useRoute()
 const lineId = route.params.id
 
 const dialog = ref({
   sendForm: false
+})
+
+let mde: InstanceType<typeof EasyMde> | null = null
+const content = ref("")
+const contentArea = ref()
+
+onMounted(async () => {
+  const EasyMde = (await import("easymde")).default
+  mde = new EasyMde({
+    element: contentArea.value.$el,
+  })
+  mde.codemirror.on("change", () => {
+    if (mde) {
+      content.value = mde.value()
+    }
+  })
 })
 
 // methods

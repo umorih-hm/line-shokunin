@@ -30,6 +30,7 @@ export default defineNuxtConfig({
   css: [
     '@/assets/styles/customize.scss',
     '@/assets/styles/main.sass',
+    "easymde/dist/easymde.min.css"
   ],
   nitro: {
     prerender: {
