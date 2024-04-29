@@ -13,6 +13,18 @@ v-container.fit-display(fluid)
 
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const {
+  listeners,
+  otayoris,
+  getListeners,
+  getOtayori
+} = useDatabase()
+
+onMounted(async () => {
+  await getListeners()
+  console.log(listeners.value)
+})
+</script>
 
 <style scoped lang="sass"></style>
