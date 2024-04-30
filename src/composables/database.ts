@@ -8,8 +8,19 @@ const mailTheme = ref()
 export const formatMailTheme = (contents: any) => {
   const items = []
   contents.forEach((content) => items.push({ value: content.id, title: content.properties.MailTheme.title[0].text.content }))
-
   return items
+}
+
+/**
+ * リスナーを情報を整形
+ */
+export const formatListener = (content: any) => {
+  return {
+    id: content.id,
+    lineId: content.properties.LineId.rich_text[0].text.content,
+    points: content.properties.Points.rollup.number,
+    radioName: content.properties.RadioName.title[0].text.content
+  }
 }
 
 export const useDatabase = () => {
@@ -19,13 +30,21 @@ export const useDatabase = () => {
   const databaseIdMailTheme = env.databaseIdMailTheme
 
   // 「リスナー」情報取得
-  const getListeners = async() => {
-    listeners.value = await $fetch('/api/getDatabase', {
+  const getListener = async(lineId: string) => {
+    const content = await $fetch('/api/getDatabase', {
       method: 'POST',
       body: {
         database_id: databaseIdListener,
+        filter: {
+          property: 'LineId',
+          rich_text: {
+            equals: lineId
+          }
+        }
       }
     })
+
+    content.results.length ? listeners.value = formatListener(content.results[0]) : listeners.value = ''
     console.log(listeners.value)
   }
 
@@ -93,7 +112,7 @@ export const useDatabase = () => {
     listeners,
     otayoris,
     mailTheme,
-    getListeners,
+    getListener,
     getOtayori,
     getMailTheme,
     createOtayori

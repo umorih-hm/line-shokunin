@@ -16,16 +16,13 @@ v-container.fit-display(fluid)
 <script setup lang="ts">
 const {
   listeners,
-  otayoris,
-  getListeners,
-  getOtayori,
-  getMailTheme
+  getListener,
 } = useDatabase()
 
 onMounted(async () => {
-  await getListeners()
-  await getOtayori()
-  await getMailTheme()
+  const lineId = '1'
+
+  await getListener(lineId)
 })
 </script>
 
