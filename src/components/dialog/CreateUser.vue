@@ -13,8 +13,8 @@ v-dialog(
     elevation="5"
   )
     div.d-flex.flex-column.py-6
-      p.text-center.text-pre-wrap.dialog-send-form__title {{ $t('dialog.create_user.title') }}
-      p.pt-4.text-center.text-pre-wrap.dialog-send-form__navigation {{ $t('dialog.create_user.navigation') }}
+      p.text-center.text-pre-wrap.dialog-create-user__title {{ $t('dialog.create_user.title') }}
+      p.pt-4.text-center.text-pre-wrap.dialog-create-user__navigation {{ $t('dialog.create_user.navigation') }}
 
     v-container.pt-0.pb-8
       v-row.d-flex.flex-row.justify-center
@@ -66,7 +66,7 @@ v-dialog(
     elevation="5"
   )
     div.d-flex.flex-column.py-6
-      p.pt-4.text-center.text-pre-wrap.dialog-create-user__navigation {{ label }}
+      p.pt-4.text-center.text-pre-wrap.dialog-create-user-result__navigation {{ label }}
     v-card-actions.d-flex.flex-row.justify-center
       v-btn.px-4.font-weight-bold(
         color="green"
@@ -144,6 +144,12 @@ const navigateToHome = () => navigateTo(`/users/${userId.value}`)
 </script>
 
 <style scoped lang="sass">
+.dialog-create-user__title
+  font-size: 18px
+
 .dialog-create-user__navigation
+  font-size: 12px
+
+.dialog-create-user-result__navigation
   font-size: 18px
 </style>
