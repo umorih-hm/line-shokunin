@@ -11,8 +11,8 @@ v-dialog(
     elevation="5"
   )
     div.d-flex.flex-column.py-16
-      p.text-center.text-pre-wrap.dialog-complete-reset-settings__title {{ $t('dialog.send_form.title') }}
-      p.pt-4.text-center.text-pre-wrap.dialog-complete-reset-settings__navigation {{ $t('dialog.send_form.navigation') }}
+      p.text-center.text-pre-wrap.dialog-send-form__title {{ $t('dialog.send_form.title') }}
+      p.pt-4.text-center.text-pre-wrap.dialog-send-form__navigation {{ $t('dialog.send_form.navigation') }}
     v-card-actions.d-flex.flex-row.justify-space-evenly
       v-btn.px-4.font-weight-bold(
         color="grey"
@@ -46,9 +46,9 @@ const ok = () => emit('ok')
 </script>
 
 <style scoped lang="sass">
-.dialog-complete-reset-settings__title
+.dialog-send-form__title
   font-size: 18px
 
-.dialog-complete-reset-settings__navigation
+.dialog-send-form__navigation
   font-size: 12px
 </style>

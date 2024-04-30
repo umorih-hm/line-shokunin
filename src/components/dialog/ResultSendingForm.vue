@@ -12,7 +12,7 @@ v-dialog(
     elevation="5"
   )
     div.d-flex.flex-column.py-16
-      p.pt-4.text-center.text-pre-wrap.dialog-complete-reset-settings__navigation {{ label }}
+      p.pt-4.text-center.text-pre-wrap.dialog-result-sending-form__navigation {{ label }}
     v-card-actions.d-flex.flex-row.justify-center
       v-btn.px-4.font-weight-bold(
         color="green"
@@ -38,9 +38,6 @@ const ok = () => emit('ok')
 </script>
 
 <style scoped lang="sass">
-.dialog-complete-reset-settings__title
+.dialog-result-sending-form__navigation
   font-size: 18px
-
-.dialog-complete-reset-settings__navigation
-  font-size: 12px
 </style>
