@@ -39,19 +39,18 @@ v-container.py-0
           ref="contentArea"
           v-model="content"
           rows="5"
-          placeholder="markdown形式で説明を記述できます"
+          placeholder="markdown形式で本文を記述できます。"
           maxlength="300"
         )
 
+    // 戻る・送信する
     v-col.d-flex.flex-row.justify-space-evenly
-      // 戻る
       v-btn.form-button__title(
         color="grey"
         rounded="pill"
         height="40px"
-        :to="`/users/${lineId}`"
+        :to="`/users/${userId}`"
       ) {{ $t('button.back') }}
-      // 送信する
       v-btn.form-button__title(
         color="green"
         rounded="pill"
@@ -66,14 +65,21 @@ dialog-send-form(
   :loading="loading.sendForm"
   @ok="submit"
 )
+// 送信完了
+dialog-result-sending-form(
+  v-model="dialog.resultSendingForm"
+  :label="label.resultSendingForm"
+  @ok="navigateToHome"
+)
 </template>
 
 <script setup lang="ts">
 import type EasyMde from "easymde"
 let mde: InstanceType<typeof EasyMde> | null = null
 
+const i18n = useI18n()
 const route = useRoute()
-const lineId = route.params.id
+const userId = route.params.id
 
 const {
   mailTheme,
@@ -85,11 +91,15 @@ const {
 const form = ref({
   theme: '',
   title: '',
-  lineId: '',
+  userId: '',
   children: {}
 })
 const dialog = ref({
-  sendForm: false
+  sendForm: false,
+  resultSendingForm: false
+})
+const label = ref({
+  resultSendingForm: ''
 })
 const loading = ref({
   sendForm: false
@@ -105,15 +115,28 @@ const submit = async() => {
   try {
     const block = useMdToNotion(content.value)
     form.value.children = block
+    // form.value.userId = userId
+    form.value.userId = '89a97e09-a80d-426e-95ea-15085dec2a5f' // デバッグ
+
     await createOtayori(unref(form))
+
     dialog.value.sendForm = false
-    navigateTo(`/users/${lineId}`)
+    label.value.resultSendingForm = i18n.t('dialog.result_sending_form.navigation.success')
+    dialog.value.resultSendingForm = true
   } catch(e: any) {
     console.log('エラー', e)
+
+    label.value.resultSendingForm = i18n.t('dialog.result_sending_form.navigation.error')
+    dialog.value.resultSendingForm = true
   } finally {
     loading.value.sendForm = false
   }
 }
+
+/**
+ * ホームへ戻る
+ */
+const navigateToHome = () => navigateTo(`/users/${userId}`)
 
 onMounted(async () => {
   await getMailTheme() // メールテーマの取得

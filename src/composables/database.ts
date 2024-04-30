@@ -7,9 +7,8 @@ const mailTheme = ref()
  */
 export const formatMailTheme = (contents: any) => {
   const items = []
-  
   contents.forEach((content) => items.push({ value: content.id, title: content.properties.MailTheme.title[0].text.content }))
-  
+
   return items
 }
 
@@ -70,13 +69,10 @@ export const useDatabase = () => {
               }
             ]
           },
-          LineId: {
-            rich_text: [
+          UserId: {
+            relation: [
               {
-                type: 'text',
-                text: {
-                  content: values.lineId
-                },
+                id: values.userId
               }
             ]
           },
