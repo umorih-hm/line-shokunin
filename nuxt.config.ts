@@ -19,11 +19,6 @@ export default defineNuxtConfig({
     },
   },
   modules: ['@nuxtjs/i18n',],
-  // runtimeConfig: {
-  //   public: {
-  //     apiUrl: process.env.API_BASE_URL,
-  //   },
-  // },
   appConfig: {
     environment: process.env.APP_ENV,
     notionToken: process.env.API_TOKEN_NOTION,
