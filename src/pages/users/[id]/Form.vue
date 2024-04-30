@@ -56,12 +56,14 @@ v-container.py-0
         color="green"
         rounded="pill"
         height="40px"
+        :disabled="!form.theme || !form.children"
         @click="dialog.sendForm = true"
       ) {{ $t('button.send') }}
 
 // 送信確認
 dialog-send-form(
   v-model="dialog.sendForm"
+  :loading="loading.sendForm"
   @ok="submit"
 )
 </template>
@@ -89,16 +91,28 @@ const form = ref({
 const dialog = ref({
   sendForm: false
 })
+const loading = ref({
+  sendForm: false
+})
 const content = ref("")
 const contentArea = ref()
 
 // methods
 const submit = async() => {
-  const block = useMdToNotion(content.value)
-  form.value.children = block
-  await createOtayori(unref(form))
-  dialog.value.sendForm = false
-  navigateTo(`/users/${lineId}`)
+  loading.value.sendForm = true
+  if(!form.value.theme || !form.value.title) return
+
+  try {
+    const block = useMdToNotion(content.value)
+    form.value.children = block
+    await createOtayori(unref(form))
+    dialog.value.sendForm = false
+    navigateTo(`/users/${lineId}`)
+  } catch(e: any) {
+    console.log('エラー', e)
+  } finally {
+    loading.value.sendForm = false
+  }
 }
 
 onMounted(async () => {
@@ -114,6 +128,7 @@ onMounted(async () => {
       uniqueId: 'mde-autosave' //ローカルストレージのキーに使用
     },
   })
+  content.value = mde.value() // 自動保存されている文章を格納
   mde.codemirror.on("change", () => {
     if (mde) {
       content.value = mde.value()

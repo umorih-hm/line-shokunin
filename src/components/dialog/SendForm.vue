@@ -26,6 +26,7 @@ v-dialog(
         width="45%"
         rounded="pill"
         variant="elevated"
+        :loading="loading"
         @click="ok"
       ) {{ $t('button.ok') }}
 </template>
@@ -33,6 +34,7 @@ v-dialog(
 <script setup lang="ts">
 const props = defineProps<{
   modelValue: boolean
+  loading: boolean
 }>()
 const emit = defineEmits<{
   (e: 'update:modelValue', value: boolean): void
