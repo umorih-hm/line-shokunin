@@ -12,7 +12,7 @@ export const formatMailTheme = (contents: any) => {
 }
 
 /**
- * リスナーを情報を整形
+ * リスナー情報を整形
  */
 export const formatListener = (content: any) => {
   return {
@@ -108,6 +108,50 @@ export const useDatabase = () => {
     })
   }
 
+    // 「リスナー」追加
+  const createUser = async(values: UserRequest) => {
+    const result =  await $fetch('/api/createPage', {
+      method: 'POST',
+      body: {
+        parent: {
+          database_id: databaseIdListener
+        },
+        properties: {
+          RadioName: {
+            title: [
+              {
+                text: {
+                  content: values.radioName
+                }
+              }
+            ]
+          },
+          Gender: {
+            select: {
+              name: values.gender
+            }
+          },
+          Age: {
+            number: values.age
+          },
+          LineId: {
+            rich_text: [
+              {
+                type: 'text',
+                text: {
+                  content: values.lineId,
+                  link: null
+                },
+              }
+            ]
+          }
+        },
+      }
+    })
+
+    return result.id
+  }
+
   return {
     listeners,
     otayoris,
@@ -115,6 +159,7 @@ export const useDatabase = () => {
     getListener,
     getOtayori,
     getMailTheme,
-    createOtayori
+    createOtayori,
+    createUser
   }
 }

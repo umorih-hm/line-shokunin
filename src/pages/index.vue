@@ -11,6 +11,10 @@ v-container.fit-display(fluid)
       indeterminate
     )
 
+// ユーザー作成
+dialog-create-user(
+  v-model="dialog.createUser"
+)
 </template>
 
 <script setup lang="ts">
@@ -19,10 +23,19 @@ const {
   getListener,
 } = useDatabase()
 
-onMounted(async () => {
-  const lineId = '1'
+const dialog = ref({
+  createUser: false
+})
 
+onMounted(async () => {
+  const lineId = '3'
   await getListener(lineId)
+
+  if(!listeners.value) {
+    dialog.value.createUser = true
+  } else {
+    navigateTo(`/users/${listeners.value.id}`)
+  }
 })
 </script>
 
