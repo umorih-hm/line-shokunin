@@ -53,12 +53,47 @@ export const useDatabase = () => {
     mailTheme.value = formatMailTheme(contents.results)
   }
 
+  // 「お便り」追加
+  const createOtayori = async(values: OtayoriRequest) => {
+    await $fetch('/api/createPage', {
+      method: 'POST',
+      body: {
+        parent: {
+          database_id: databaseIdOtayori
+        },
+        properties: {
+          Title: {
+            title: [
+              {
+                text: {
+                  content: values.title
+                }
+              }
+            ]
+          },
+          LineId: {
+            rich_text: [
+              {
+                type: 'text',
+                text: {
+                  content: values.lineId
+                },
+              }
+            ]
+          }
+        },
+        children: values.children,
+      }
+    })
+  }
+
   return {
     listeners,
     otayoris,
     mailTheme,
     getListeners,
     getOtayori,
-    getMailTheme
+    getMailTheme,
+    createOtayori
   }
 }

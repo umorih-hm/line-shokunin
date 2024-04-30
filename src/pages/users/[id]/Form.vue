@@ -15,6 +15,18 @@ v-container.py-0
         variant="underlined"
       )
 
+    // 件名
+    v-col(cols="12")
+      div.bg-red.rounded-pill.ma-auto.text-center.form-title(
+        style="height: 30px width: 70vw max-width: 400px"
+      ) {{ $t('pages.users.form.mail_title') }}
+    v-col(cols="12")
+      v-text-field(
+        v-model="form.title"
+        variant="underlined"
+        prepend-icon="mdi-format-text-variant-outline"
+      )
+
     // 本文
     v-col(cols="12")
       div.bg-red.rounded-pill.ma-auto.text-center.form-title(
@@ -71,10 +83,16 @@ const lineId = route.params.id
 
 const {
   mailTheme,
-  getMailTheme
+  getMailTheme,
+  createOtayori
 } = useDatabase()
 
 // ref
+const form = ref({
+  title: '',
+  lineId: '',
+  children: {}
+})
 const dialog = ref({
   sendForm: false
 })
@@ -82,10 +100,12 @@ const content = ref("")
 const contentArea = ref()
 
 // methods
-const submit = () => {
-  // dialog.value.sendForm = false
-  // navigateTo(`/users/${lineId}`)
+const submit = async() => {
   const block = useMdToNotion(content.value)
+  form.value.children = block
+  await createOtayori(unref(form))
+  dialog.value.sendForm = false
+  navigateTo(`/users/${lineId}`)
 }
 
 onMounted(async () => {
