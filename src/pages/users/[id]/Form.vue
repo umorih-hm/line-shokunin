@@ -115,8 +115,7 @@ const submit = async() => {
   try {
     const block = useMdToNotion(content.value)
     form.value.children = block
-    // form.value.userId = userId
-    form.value.userId = '89a97e09-a80d-426e-95ea-15085dec2a5f' // デバッグ
+    form.value.userId = userId
 
     await createOtayori(unref(form))
 
