@@ -1,8 +1,10 @@
 import liff from '@line/liff'
 
-export default defineNuxtPlugin(async () => {
+export const useLiff = async() => {
   try {
-    const liffId = process.env.LIFF_ID as string
+    const env = useAppConfig()
+    const liffId = env.liffId
+    console.log(liffId)
 
     // LIFFの初期化
     await liff.init({ liffId: liffId })
@@ -13,4 +15,4 @@ export default defineNuxtPlugin(async () => {
   } catch (e) {
     console.error(e)
   }
-})
+}

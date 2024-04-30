@@ -28,6 +28,7 @@ const dialog = ref({
 })
 
 onMounted(async () => {
+  await useLiff()
   const lineId = '3'
   await getListener(lineId)
 
