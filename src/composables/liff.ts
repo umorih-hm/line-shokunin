@@ -8,9 +8,9 @@ export const useLiff = async() => {
     // LIFFの初期化
     await liff.init({ liffId: liffId })
 
-    // 認証情報の取得
+    // ユーザープロファイルの取得
     const profile = await liff.getProfile()
-    console.log(profile)
+    return profile
   } catch (e) {
     console.error(e)
   }
