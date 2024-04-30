@@ -968,7 +968,7 @@
 
 "@line/liff@^2.23.2":
   version "2.23.2"
-  resolved "https://registry.npmjs.org/@line/liff/-/liff-2.23.2.tgz"
+  resolved "https://registry.yarnpkg.com/@line/liff/-/liff-2.23.2.tgz#475abb2847dedd1b6c0ceaee129e03175598059e"
   dependencies:
     "@liff/analytics" "2.23.2"
     "@liff/close-window" "2.23.2"
@@ -1078,7 +1078,6 @@
 "@notionhq/client@^2.2.15":
   version "2.2.15"
   resolved "https://registry.yarnpkg.com/@notionhq/client/-/client-2.2.15.tgz#739fc8edb1357a2e2e35d026571fafe17c089606"
-  integrity sha512-XhdSY/4B1D34tSco/GION+23GMjaS9S2zszcqYkMHo8RcWInymF6L1x+Gk7EmHdrSxNFva2WM8orhC4BwQCwgw==
   dependencies:
     "@types/node-fetch" "^2.5.10"
     node-fetch "^2.6.1"
