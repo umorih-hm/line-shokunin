@@ -4,6 +4,7 @@ declare interface UserRequest {
 }
 
 declare interface OtayoriRequest {
+  theme: string
   title: string
   lineId: string
   children: array

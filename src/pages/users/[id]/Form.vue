@@ -8,6 +8,7 @@ v-container.py-0
       ) {{ $t('pages.users.form.mail_theme') }}
     v-col(cols="12")
       v-select(
+        v-model="form.theme"
         width="80vw"
         max-width="400px"
         prepend-icon="mdi-email-outline"
@@ -42,15 +43,6 @@ v-container.py-0
           maxlength="300"
         )
 
-    // 添付ファイル
-    v-col(cols="12")
-      div.bg-red.rounded-pill.ma-auto.text-center.form-title(
-        style="height: 30px width: 70vw max-width: 400px"
-      ) {{ $t('pages.users.form.attachment') }}
-    v-col(cols="12")
-      v-file-input(
-        variant="underlined"
-      )
     v-col.d-flex.flex-row.justify-space-evenly
       // 戻る
       v-btn.form-button__title(
@@ -89,6 +81,7 @@ const {
 
 // ref
 const form = ref({
+  theme: '',
   title: '',
   lineId: '',
   children: {}
