@@ -14,6 +14,7 @@ v-container.fit-display(fluid)
 // ユーザー作成
 dialog-create-user(
   v-model="dialog.createUser"
+  :lineId="lineId"
 )
 </template>
 
@@ -26,11 +27,12 @@ const {
 const dialog = ref({
   createUser: false
 })
+const lineId = ref('')
 
 onMounted(async () => {
   const profile = await useLiff()
-  const lineId = profile?.userId
-  await getListener(lineId)
+  lineId.value = profile?.userId
+  await getListener(lineId.value)
 
   if(!listeners.value) {
     dialog.value.createUser = true

@@ -119,8 +119,7 @@ const submit = async() => {
   if(!form.value.radioName || !form.value.gender || !form.value.age) return
 
   try {
-    // form.value.lineId = props.lineId
-    form.value.lineId = '2'
+    form.value.lineId = props.lineId
     userId.value = await createUser(unref(form))
 
     label.value = i18n.t('dialog.create_user.result.success')
