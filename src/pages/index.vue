@@ -23,7 +23,7 @@ const {
 
 onMounted(async () => {
   await getListeners()
-  console.log(listeners.value)
+  await getOtayori()
 })
 </script>
 
