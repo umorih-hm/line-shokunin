@@ -7,7 +7,7 @@ v-container
         color="green"
         rounded="pill"
         height="80px"
-        :to="`/users/${lineId}/form`"
+        :to="`/users/${userId}/form`"
       ) {{ $t('button.post') }}
   // 過去の投稿一覧
   v-row
@@ -16,8 +16,8 @@ v-container
 </template>
 
 <script setup lang="ts">
-const lineId = useState('lineId', () => '')
-lineId.value = 1
+const route = useRoute()
+const userId = route.params.id
 </script>
 
 <style scoped lang="sass">
