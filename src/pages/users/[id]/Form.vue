@@ -11,7 +11,7 @@ v-container.py-0
         width="80vw"
         max-width="400px"
         prepend-icon="mdi-email-outline"
-        :items="['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']"
+        :items="mailTheme"
         variant="underlined"
       )
 
@@ -69,6 +69,11 @@ let mde: InstanceType<typeof EasyMde> | null = null
 const route = useRoute()
 const lineId = route.params.id
 
+const {
+  mailTheme,
+  getMailTheme
+} = useDatabase()
+
 // ref
 const dialog = ref({
   sendForm: false
@@ -84,6 +89,8 @@ const submit = () => {
 }
 
 onMounted(async () => {
+  await getMailTheme() // メールテーマの取得
+
   // easeMde の初期化
   const EasyMde = (await import("easymde")).default
   mde = new EasyMde({
@@ -91,7 +98,7 @@ onMounted(async () => {
     autosave: {            //自動保存
       enabled: true,
       delay: 1000,
-      uniqueId: 'mde-autosave-demo' //ローカルストレージのキーに使用
+      uniqueId: 'mde-autosave' //ローカルストレージのキーに使用
     },
   })
   mde.codemirror.on("change", () => {

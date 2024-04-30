@@ -18,12 +18,14 @@ const {
   listeners,
   otayoris,
   getListeners,
-  getOtayori
+  getOtayori,
+  getMailTheme
 } = useDatabase()
 
 onMounted(async () => {
   await getListeners()
   await getOtayori()
+  await getMailTheme()
 })
 </script>
 
