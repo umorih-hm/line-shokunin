@@ -51,7 +51,6 @@ export const useDatabase = () => {
       }
     })
     mailTheme.value = formatMailTheme(contents.results)
-    console.log(mailTheme.value)
   }
 
   return {
