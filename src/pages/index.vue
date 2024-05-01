@@ -21,7 +21,8 @@ dialog-create-user(
 <script setup lang="ts">
 definePageMeta({ layout: 'auth' })
 
-const userId = useState('userId', () => '')
+const lineId = useState('lineId', () => '') // line のユーザーID
+const userId = useState('userId', () => '') // notion の ページID
 const {
   listeners,
   getListener,
@@ -30,7 +31,6 @@ const {
 const dialog = ref({
   createUser: false
 })
-const lineId = ref('')
 
 onMounted(async () => {
   const profile = await useLiff()

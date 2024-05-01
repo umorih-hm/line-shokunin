@@ -36,6 +36,7 @@ v-container
 <script setup lang="ts">
 const route = useRoute()
 const userId = route.params.id
+const lineId = useState('lineId', () => '')
 
 const {
   listeners,
@@ -51,9 +52,9 @@ const form = ref({
 })
 
 onMounted(async () => {
-  console.log(`userId:${userId}`)
+  if(!lineId.value) return navigateTo('/')
 
-  await getListener(userId)
+  await getListener(lineId.value)
   form.value.points = listeners.value.points
   form.value.passedRate = listeners.value.passedRate
 })
