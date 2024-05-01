@@ -50,8 +50,9 @@ const form = ref({
   passedRate: 0
 })
 
-
 onMounted(async () => {
+  console.log(`userId:${userId}`)
+
   await getListener(userId)
   form.value.points = listeners.value.points
   form.value.passedRate = listeners.value.passedRate
