@@ -19,6 +19,7 @@ dialog-create-user(
 </template>
 
 <script setup lang="ts">
+const userId = useState('userId', () => '')
 const {
   listeners,
   getListener,
@@ -37,6 +38,7 @@ onMounted(async () => {
   if(!listeners.value) {
     dialog.value.createUser = true
   } else {
+    userId.value = listeners.value.id
     navigateTo(`/users/${listeners.value.id}`)
   }
 })

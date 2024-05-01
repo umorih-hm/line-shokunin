@@ -88,6 +88,7 @@ const emit = defineEmits<{
 const dialog = useVModel('modelValue', props, emit)
 
 const i18n = useI18n()
+const id = useState('userId', () => '')
 
 const {
   createUser
@@ -137,7 +138,10 @@ const submit = async() => {
 /**
  * ホームへ戻る
  */
-const navigateToHome = () => navigateTo(`/users/${userId.value}`)
+const navigateToHome = () => {
+  id.value = userId.value
+  navigateTo(`/users/${userId.value}`)
+}
 
 
 </script>
