@@ -26,12 +26,13 @@ v-app
 </template>
 
 <script setup lang="ts">
-const lineId = useState('lineId', () => '')
+const route = useRoute()
+const userId = route.params.id
 const i18n = useI18n()
 const footerMenus = [
-  { title: i18n.t('layout.footer.menus.home'), value: 'home', to: `/users/${lineId}`, icon: 'mdi-home-circle-outline' },
-  { title: i18n.t('layout.footer.menus.point'), value: 'point', to: `/users/${lineId}/point`, icon: 'mdi-file-powerpoint-box-outline' },
-  { title: i18n.t('layout.footer.menus.settings'), value: 'settings', to: `/users/${lineId}/settings`, icon: 'mdi-cog-outline' },
+  { title: i18n.t('layout.footer.menus.home'), value: 'home', to: `/users/${userId}`, icon: 'mdi-home-circle-outline' },
+  { title: i18n.t('layout.footer.menus.point'), value: 'point', to: `/users/${userId}/point`, icon: 'mdi-file-powerpoint-box-outline' },
+  { title: i18n.t('layout.footer.menus.settings'), value: 'settings', to: `/users/${userId}/settings`, icon: 'mdi-cog-outline' },
 ]
 </script>
 
