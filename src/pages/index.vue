@@ -19,6 +19,8 @@ dialog-create-user(
 </template>
 
 <script setup lang="ts">
+definePageMeta({ layout: 'auth' })
+
 const userId = useState('userId', () => '')
 const {
   listeners,
