@@ -2,7 +2,7 @@ declare interface UserRequest {
   radioName: string
   gender: string
   age: number | null
-  lineId: string
+  lineId?: string
 }
 
 declare interface OtayoriRequest {

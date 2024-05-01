@@ -15,12 +15,15 @@ export const formatMailTheme = (contents: any) => {
  * リスナー情報を整形
  */
 export const formatListener = (content: any) => {
+  console.log(content)
   return {
     id: content.id,
     lineId: content.properties.LineId.rich_text[0].text.content,
     points: content.properties.Points.rollup.number,
     passedRate: content.properties.PassedRate.rollup.number,
-    radioName: content.properties.RadioName.title[0].text.content
+    radioName: content.properties.RadioName.title[0].text.content,
+    age: content.properties.Age.number,
+    gender: content.properties.Gender.select.name
   }
 }
 
@@ -109,9 +112,9 @@ export const useDatabase = () => {
     })
   }
 
-    // 「リスナー」追加
+  // 「リスナー」追加
   const createUser = async(values: UserRequest) => {
-    const result =  await $fetch('/api/createPage', {
+    const result = await $fetch('/api/createPage', {
       method: 'POST',
       body: {
         parent: {
@@ -153,6 +156,37 @@ export const useDatabase = () => {
     return result.id
   }
 
+  // 「リスナー」更新
+  const updateUser = async(values: UserRequest, pageId: string) => {
+    const result = await $fetch('/api/updatePage', {
+      method: 'POST',
+      body: {
+        page_id: pageId,
+        properties: {
+          RadioName: {
+            title: [
+              {
+                text: {
+                  content: values.radioName
+                }
+              }
+            ]
+          },
+          Gender: {
+            select: {
+              name: values.gender
+            }
+          },
+          Age: {
+            number: values.age
+          }
+        },
+      }
+    })
+
+    return result.id
+  }
+
   return {
     listeners,
     otayoris,
@@ -161,6 +195,7 @@ export const useDatabase = () => {
     getOtayori,
     getMailTheme,
     createOtayori,
-    createUser
+    createUser,
+    updateUser
   }
 }

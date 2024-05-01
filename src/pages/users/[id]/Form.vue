@@ -80,6 +80,7 @@ let mde: InstanceType<typeof EasyMde> | null = null
 const i18n = useI18n()
 const route = useRoute()
 const userId = route.params.id
+const lineId = useState('lineId', () => '')
 
 const {
   mailTheme,
@@ -138,6 +139,7 @@ const submit = async() => {
 const navigateToHome = () => navigateTo(`/users/${userId}`)
 
 onMounted(async () => {
+  if(!lineId.value) return navigateTo('/')
   await getMailTheme() // メールテーマの取得
 
   // easeMde の初期化

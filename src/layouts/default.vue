@@ -33,7 +33,10 @@ const footerMenus = [
   { title: i18n.t('layout.footer.menus.point'), value: 'point', to: `/users/${userId.value}/point`, icon: 'mdi-file-powerpoint-box-outline' },
   { title: i18n.t('layout.footer.menus.settings'), value: 'settings', to: `/users/${userId.value}/settings`, icon: 'mdi-cog-outline' },
 ]
-console.log(userId.value, 'default')
+
+onMounted(async () => {
+  if(!userId.value) return navigateTo('/')
+})
 </script>
 
 <style scoped lang="sass">

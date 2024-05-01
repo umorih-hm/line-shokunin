@@ -34,8 +34,6 @@ v-container
 </template>
 
 <script setup lang="ts">
-const route = useRoute()
-const userId = route.params.id
 const lineId = useState('lineId', () => '')
 
 const {
