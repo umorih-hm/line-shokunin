@@ -1,7 +1,7 @@
 declare interface User {
-  
-}
-
-declare interface  {
-  
+  id: string
+  lineId: string
+  points: number
+  passedRate: number
+  radioName: string
 }

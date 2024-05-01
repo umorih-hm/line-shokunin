@@ -22,6 +22,12 @@
         "mail_title": "件名",
         "content": "本文",
         "attachment": "添付ファイル"
+      },
+      "point": {
+        "current_point": "獲得ポイント",
+        "current_point_unit": "pt",
+        "pass_rate": "投稿採用率",
+        "pass_rate_unit": "%"
       }
     }
   },

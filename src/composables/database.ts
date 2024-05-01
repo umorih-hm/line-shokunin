@@ -19,6 +19,7 @@ export const formatListener = (content: any) => {
     id: content.id,
     lineId: content.properties.LineId.rich_text[0].text.content,
     points: content.properties.Points.rollup.number,
+    passedRate: content.properties.PassedRate.rollup.number,
     radioName: content.properties.RadioName.title[0].text.content
   }
 }
