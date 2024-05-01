@@ -23,7 +23,7 @@ v-container
       )
     v-col(cols="6")
       div.bg-green.rounded-lg.ma-auto(style="height: 100px")
-        h1.text-center.point-number__text {{ form.passedRate * 100 }}
+        h1.text-center.point-number__text {{ Math.round(form.passedRate * 100) }}
         h1.text-end.px-4.point-number-unit__text {{ $t('pages.users.point.pass_rate_unit') }}
 
   v-row.d-flex.justify-center
