@@ -18,9 +18,10 @@ v-container
       v-for="theme in mailTheme"
       :key="theme.value"
     )
-      v-btn.mail-theme-image(
+      v-btn.border.mail-theme-image(
         width="300px"
         height="100px"
+        rounded="lg"
         variant="plain"
         @click="navigateTo(`/users/${userId}/form?theme=${theme.value}`)"
       )
@@ -30,7 +31,7 @@ v-container
           height="100px"
           :src="theme.image[0].file.url"
         )
-        h1.text-center(v-else) {{ theme.title }}
+        h2.text-center(v-else) {{ theme.title }}
 </template>
 
 <script setup lang="ts">
