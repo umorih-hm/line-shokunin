@@ -141,6 +141,7 @@ const navigateToHome = () => navigateTo(`/users/${userId}`)
 onMounted(async () => {
   if(!lineId.value) return navigateTo('/')
   await getMailTheme() // メールテーマの取得
+  if(route.query.theme) form.value.theme = route.query.theme
 
   // easeMde の初期化
   const EasyMde = (await import("easymde")).default

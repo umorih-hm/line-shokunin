@@ -1,6 +1,9 @@
 <template lang="pug">
 // 初期化ローディング
-v-container.fit-display(fluid)
+v-container.fit-display(
+  v-if="!dialog.createUser"
+  fluid
+)
   v-card.h-100.d-flex.justify-center.align-center(
     color="#00000000"
     variant="flat"

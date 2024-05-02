@@ -7,7 +7,11 @@ const mailTheme = ref()
  */
 export const formatMailTheme = (contents: any) => {
   const items = []
-  contents.forEach((content) => items.push({ value: content.id, title: content.properties.MailTheme.title[0].text.content }))
+  contents.forEach((content) => items.push({
+    value: content.id,
+    title: content.properties.MailTheme.title[0].text.content,
+    image: content.properties.Image.files || ''
+  }))
   return items
 }
 
@@ -69,6 +73,12 @@ export const useDatabase = () => {
       method: 'POST',
       body: {
         database_id: databaseIdMailTheme,
+        filter: {
+          property: 'isRecruting',
+          checkbox: {
+            equals: true
+          }
+        }
       }
     })
     mailTheme.value = formatMailTheme(contents.results)
