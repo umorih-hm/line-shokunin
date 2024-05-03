@@ -79,6 +79,7 @@ import type EasyMde from "easymde"
 let mde: InstanceType<typeof EasyMde> | null = null
 
 const i18n = useI18n()
+const config = useConfig()
 const route = useRoute()
 const userId = route.params.id
 const lineId = useState('lineId', () => '')
@@ -132,6 +133,7 @@ const submit = async() => {
 
     await createOtayori(unref(form))
 
+    config.remove('smde_mde-autosave')
     dialog.value.sendForm = false
     label.value.resultSendingForm = i18n.t('dialog.result_sending_form.navigation.success')
     dialog.value.resultSendingForm = true
