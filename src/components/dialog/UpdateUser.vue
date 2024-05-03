@@ -79,7 +79,7 @@ v-dialog(
         width="50%"
         rounded="pill"
         variant="elevated"
-        @click="navigateToSettings"
+        @click="navigateToUser"
       ) {{ $t('button.ok') }}
 </template>
 
@@ -142,7 +142,7 @@ const submit = async() => {
 /**
  * index に戻る
  */
-const navigateToSettings = () => navigateTo('/')
+const navigateToUser = () => navigateTo('/')
 </script>
 
 <style scoped lang="sass">

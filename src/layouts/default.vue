@@ -31,7 +31,7 @@ const i18n = useI18n()
 const footerMenus = [
   { title: i18n.t('layout.footer.menus.home'), value: 'home', to: `/users/${userId.value}`, icon: 'mdi-home-circle-outline' },
   { title: i18n.t('layout.footer.menus.point'), value: 'point', to: `/users/${userId.value}/point`, icon: 'mdi-file-powerpoint-box-outline' },
-  { title: i18n.t('layout.footer.menus.settings'), value: 'settings', to: `/users/${userId.value}/settings`, icon: 'mdi-cog-outline' },
+  { title: i18n.t('layout.footer.menus.user'), value: 'user', to: `/users/${userId.value}/user`, icon: 'mdi-account-outline' },
 ]
 
 onMounted(async () => {
