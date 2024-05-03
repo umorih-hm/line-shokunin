@@ -20,7 +20,6 @@ export const formatMailTheme = (contents: any) => {
  * リスナー情報を整形
  */
 export const formatListener = (content: any) => {
-  console.log(content)
   return {
     id: content.id,
     lineId: content.properties.LineId.rich_text[0].text.content,
@@ -54,7 +53,6 @@ export const useDatabase = () => {
     })
 
     content.results.length ? listeners.value = formatListener(content.results[0]) : listeners.value = ''
-    console.log(listeners.value)
   }
 
   // 「お便り」情報取得
@@ -65,7 +63,6 @@ export const useDatabase = () => {
         database_id: databaseIdOtayori,
       }
     })
-    console.log(otayoris.value)
   }
 
   // 「メールテーマ」情報取得

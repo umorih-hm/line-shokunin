@@ -15,7 +15,7 @@ v-container.py-0
         :items="mailTheme"
         variant="underlined"
       )
-      p.text-center.border-lg.border-red.text-red.rounded-md.py-4 {{ mailThemeNavigation }}
+      p.text-center.border-lg.border-red.text-red.rounded-md.py-4(v-if="mailThemeNavigation") {{ mailThemeNavigation }}
 
     // 件名
     v-col(cols="12")
