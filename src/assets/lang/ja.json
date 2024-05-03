@@ -24,10 +24,11 @@
         "attachment": "添付ファイル"
       },
       "point": {
+        "post_count": "これまでの投稿数",
+        "post_count_unit": "通",
         "current_point": "獲得ポイント",
         "current_point_unit": "pt",
-        "pass_rate": "投稿採用率",
-        "pass_rate_unit": "%"
+        "pass_count": "投稿採用数",
       }
     }
   },

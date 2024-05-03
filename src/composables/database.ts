@@ -20,11 +20,13 @@ export const formatMailTheme = (contents: any) => {
  * リスナー情報を整形
  */
 export const formatListener = (content: any) => {
+  console.log(content)
   return {
     id: content.id,
     lineId: content.properties.LineId.rich_text[0].text.content,
-    points: content.properties.Points.rollup.number,
-    passedRate: content.properties.PassedRate.rollup.number,
+    postCount: content.properties.PostCount.rollup.number,
+    passedCount: content.properties.PassedCount.rollup.number,
+    points: content.properties.Points.formula.number,
     radioName: content.properties.RadioName.title[0].text.content,
     age: content.properties.Age.number,
     gender: content.properties.Gender.select.name

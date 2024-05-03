@@ -13,24 +13,31 @@ v-container
         h1.text-center.point-number__text {{ form.points }}
         span.font-weight-bold.point-number-unit__text {{ $t('pages.users.point.current_point_unit') }}
 
-  // 投稿採用率
-  v-row.d-flex.flex-row.justify-center
+  // これまでの投稿数
+  v-row.d-flex.flex-row.justify-center.mt-6
+    v-col.d-flex.flex-column(cols="6")
+      h4.text-center.text-grey.pb-2 {{ $t('pages.users.point.post_count') }}
+      v-img(
+        height="60px"
+        src="/point_person.png"
+      )
     v-col(cols="6")
-      h3.text-center.text-green.pb-2 {{ $t('pages.users.point.pass_rate') }}
+      div.border-lg.border-grey.rounded-lg.ma-auto.point-card(style="height: 100px")
+        h1.text-grey.text-center.point-number__text {{ form.postCount }}
+        span.text-grey.font-weight-bold.point-number-unit__text {{ $t('pages.users.point.post_count_unit') }}
+
+  // 投稿採用率
+  v-row.d-flex.flex-row.justify-center.mt-6
+    v-col(cols="6")
+      h3.text-center.text-green.pb-2 {{ $t('pages.users.point.pass_count') }}
       v-img(
         height="60px"
         src="/point_mail.png"
       )
     v-col(cols="6")
-      div.bg-green.rounded-lg.ma-auto.point-card(style="height: 100px")
-        h1.text-center.point-number__text {{ Math.round(form.passedRate * 100) }}
-        span.font-weight-bold.point-number-unit__text {{ $t('pages.users.point.pass_rate_unit') }}
-
-  v-row.d-flex.justify-center
-    v-img(
-      height="240px"
-      src="/point_person.png"
-    )
+      div.border-lg.border-green.rounded-lg.ma-auto.point-card(style="height: 100px")
+        h1.text-green.text-center.point-number__text {{ form.passedCount }}
+        span.text-green.font-weight-bold.point-number-unit__text {{ $t('pages.users.point.post_count_unit') }}
 </template>
 
 <script setup lang="ts">
@@ -45,16 +52,18 @@ const dialog = ref({
   createUser: false
 })
 const form = ref({
-  points: 0,
-  passedRate: 0
+  postCount: 0,
+  passedCount: 0,
+  points: 0
 })
 
 onMounted(async () => {
   if(!lineId.value) return navigateTo('/')
 
   await getListener(lineId.value)
+  form.value.postCount = listeners.value.postCount
+  form.value.passedCount = listeners.value.passedCount
   form.value.points = listeners.value.points
-  form.value.passedRate = listeners.value.passedRate
 })
 </script>
 
