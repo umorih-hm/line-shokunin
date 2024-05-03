@@ -10,7 +10,8 @@ export const formatMailTheme = (contents: any) => {
   contents.forEach((content) => items.push({
     value: content.id,
     title: content.properties.MailTheme.title[0].text.content,
-    image: content.properties.Image.files || ''
+    image: content.properties.Image.files || '',
+    navigation: content.properties.Navigation.rich_text[0].text.content || ''
   }))
   return items
 }

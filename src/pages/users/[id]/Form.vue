@@ -15,6 +15,7 @@ v-container.py-0
         :items="mailTheme"
         variant="underlined"
       )
+      p.text-center {{ mailThemeNavigation }}
 
     // 件名
     v-col(cols="12")
@@ -107,6 +108,17 @@ const loading = ref({
 })
 const content = ref("")
 const contentArea = ref()
+
+// computed
+const mailThemeNavigation = computed(() => {
+  let navigation;
+  if(mailTheme.value) {
+    mailTheme.value.forEach((theme) => {
+      if(theme.value === form.value.theme) navigation = theme.navigation
+    })
+  }
+  return navigation
+})
 
 // methods
 const submit = async() => {
