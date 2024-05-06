@@ -20,7 +20,10 @@ v-dialog(
         :key="item"
       )
         v-card-title.text-center {{ item.title }}
-        p.dialog-tutorial__navigation {{ item.navigation }}
+        p.mb-4.text-pre-wrap.text-center.dialog-tutorial__navigation {{ item.navigation }}
+        v-img.border.overflow-visible(
+          :src="item.image"
+        )
     v-divider
     v-card-actions.d-flex.flex-column.justify-center
       v-checkbox(
@@ -50,9 +53,10 @@ const close = () => emit('close', checkbox.value)
 const i18n = useI18n()
 
 const windowItems = [
-  { title: '投稿する', navigation: 'メールテーマを選択すると投稿画面に遷移します。', image: '' },
-  { title: 'ポイントを貯める', navigation: 'ポイント画面で現在のポイント数を確認できます。', image: '' },
-  { title: '設定を変える', navigation: 'ユーザー情報を変更することができます。', image: '' }
+  { title: i18n.t('dialog.tutorial.form_1.title'), navigation: i18n.t('dialog.tutorial.form_1.navigation'), image: '' },
+  { title: i18n.t('dialog.tutorial.form_2.title'), navigation: i18n.t('dialog.tutorial.form_2.navigation'), image: '/window_form.png' },
+  { title: i18n.t('dialog.tutorial.point.title'), navigation: i18n.t('dialog.tutorial.point.navigation'), image: '/window_point.png' },
+  { title: i18n.t('dialog.tutorial.user.title'), navigation: i18n.t('dialog.tutorial.user.navigation'), image: '/window_user.png' }
 ]
 
 // ref
