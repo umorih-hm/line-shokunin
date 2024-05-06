@@ -21,7 +21,7 @@ v-dialog(
         v-img.border.overflow-visible(
           :src="item.image"
         )
-    v-card-actions.d-flex.flex-column.justify-center
+    v-card-actions.d-flex.flex-column.justify-center(v-if="window === 3")
       v-checkbox(
         v-model="checkbox"
         :label="$t('dialog.tutorial.skip_show')"
@@ -33,6 +33,19 @@ v-dialog(
         variant="elevated"
         @click="close"
       ) {{ $t('button.close') }}
+    div.d-flex.justify-space-between
+      v-btn(
+        icon="mdi-arrow-left-bold-circle-outline"
+        variant="plain"
+        :disabled="window == 0"
+        @click="window -= 1"
+      )
+      v-btn(
+        icon="mdi-arrow-right-bold-circle-outline"
+        variant="plain"
+        :disabled="window == 3"
+        @click="window += 1"
+      )
 </template>
 
 <script setup lang="ts">
@@ -49,7 +62,7 @@ const close = () => emit('close', checkbox.value)
 const i18n = useI18n()
 
 const windowItems = [
-  { title: i18n.t('dialog.tutorial.form_1.title'), navigation: i18n.t('dialog.tutorial.form_1.navigation'), image: '' },
+  { title: i18n.t('dialog.tutorial.form_1.title'), navigation: i18n.t('dialog.tutorial.form_1.navigation'), image: '/window_home.png' },
   { title: i18n.t('dialog.tutorial.form_2.title'), navigation: i18n.t('dialog.tutorial.form_2.navigation'), image: '/window_form.png' },
   { title: i18n.t('dialog.tutorial.point.title'), navigation: i18n.t('dialog.tutorial.point.navigation'), image: '/window_point.png' },
   { title: i18n.t('dialog.tutorial.user.title'), navigation: i18n.t('dialog.tutorial.user.navigation'), image: '/window_user.png' }
