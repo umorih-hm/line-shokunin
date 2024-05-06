@@ -5,7 +5,7 @@ const config = {
     if (cache[key]) return cache[key]
 
     // localStorage が空であればデフォルト値、存在すればその値を返す
-    return JSON.parse(localStorage.getItem(`config.${key}`) ?? '""') === '' ? defaultValue : JSON.parse(localStorage.getItem(`config.${key}`) ?? '""')
+    return JSON.parse(localStorage.getItem(`config.${key}`) ?? '""') || defaultValue
   },
 
   set: (key: string, value: any) => {

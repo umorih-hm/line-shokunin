@@ -2,13 +2,6 @@
 v-container
   // ラジオに投稿する
   v-row
-    v-col.d-flex.flex-row.justify-center
-      v-btn.post-button__title(
-        color="green"
-        rounded="pill"
-        height="80px"
-        :to="`/users/${userId}/form`"
-      ) {{ $t('button.post') }}
   // テーマ一覧
   v-row
     v-col(cols="12")
@@ -20,7 +13,7 @@ v-container
     )
       v-btn.border.mail-theme-image(
         width="300px"
-        height="100px"
+        height="150px"
         rounded="lg"
         variant="plain"
         @click="navigateTo(`/users/${userId}/form?theme=${theme.value}`)"
@@ -32,9 +25,16 @@ v-container
           :src="theme.image[0].file.url"
         )
         h2.text-center(v-else) {{ theme.title }}
+
+// チュートリアル
+dialog-tutorial(
+  v-model="dialog.tutorial"
+  @close="closeTutorial"
+)
 </template>
 
 <script setup lang="ts">
+const config = useConfig()
 const route = useRoute()
 const userId = route.params.id
 const lineId = useState('lineId', () => '') // line のユーザーID
@@ -44,9 +44,23 @@ const {
   getMailTheme,
 } = useDatabase()
 
+// ref
+const dialog = ref({
+  tutorial: false
+})
+
+// methods
+const closeTutorial = (isSkip: boolean) => {
+  config.set('isSkipTutorial', isSkip)
+  dialog.value.tutorial = false
+}
+
 onMounted(async () => {
   if(!lineId.value) return navigateTo('/')
   await getMailTheme()
+
+  const isSkipTutorial = config.get('isSkipTutorial', '')
+  if(!isSkipTutorial) dialog.value.tutorial = true
 })
 </script>
 
