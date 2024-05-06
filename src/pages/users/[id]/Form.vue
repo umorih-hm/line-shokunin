@@ -15,7 +15,7 @@ v-container.py-0
         :items="mailTheme"
         variant="underlined"
       )
-      p.text-center.border-lg.border-red.text-red.rounded-md.py-4(v-if="mailThemeNavigation") {{ mailThemeNavigation }}
+      p.text-center.text-pre-wrap.border-lg.border-red.text-red.rounded-md.py-4(v-if="mailThemeNavigation") {{ mailThemeNavigation }}
 
     // 件名
     v-col(cols="12")
@@ -82,7 +82,6 @@ const i18n = useI18n()
 const config = useConfig()
 const route = useRoute()
 const userId = route.params.id
-const lineId = useState('lineId', () => '')
 
 const {
   mailTheme,
@@ -153,7 +152,6 @@ const submit = async() => {
 const navigateToHome = () => navigateTo(`/users/${userId}`)
 
 onMounted(async () => {
-  if(!lineId.value) return navigateTo('/')
   await getMailTheme() // メールテーマの取得
   if(route.query.theme) form.value.theme = route.query.theme
 

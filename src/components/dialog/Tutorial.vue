@@ -11,10 +11,7 @@ v-dialog(
     color="grey_lighten_1"
     elevation="5"
   )
-    v-window(
-      v-model="window"
-      touch
-    )
+    v-window(v-model="window")
       v-window-item(
         v-for="item in windowItems"
         :key="item"
@@ -24,7 +21,6 @@ v-dialog(
         v-img.border.overflow-visible(
           :src="item.image"
         )
-    v-divider
     v-card-actions.d-flex.flex-column.justify-center
       v-checkbox(
         v-model="checkbox"
@@ -60,7 +56,7 @@ const windowItems = [
 ]
 
 // ref
-const window = ref(false)
+const window = ref(0)
 const checkbox = ref(false)
 </script>
 

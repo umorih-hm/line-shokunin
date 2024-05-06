@@ -1,7 +1,5 @@
 <template lang="pug">
 v-container
-  // ラジオに投稿する
-  v-row
   // テーマ一覧
   v-row
     v-col(cols="12")
@@ -18,10 +16,10 @@ v-container
         variant="plain"
         @click="navigateTo(`/users/${userId}/form?theme=${theme.value}`)"
       )
-        v-img(
+        v-img.rounded-lg(
           v-if="theme.image.length"
           width="300px"
-          height="100px"
+          height="150px"
           :src="theme.image[0].file.url"
         )
         h2.text-center(v-else) {{ theme.title }}
