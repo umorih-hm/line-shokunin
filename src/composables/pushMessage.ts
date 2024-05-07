@@ -2,16 +2,6 @@ import * as line from '@line/bot-sdk';
 import { TextMessage } from '@line/bot-sdk';
 import { convertToFlexMessage } from 'markdown-flex-message'
 
-// export const useLineClient = () => {
-//   const env = useAppConfig()
-//   const channelAccessToken = env.channelAccessToken
-
-//   const config = {
-//     channelAccessToken: channelAccessToken,
-//   }
-//   return new line.messagingApi.MessagingApiClient(config)
-// }
-
 export const usePushMessage = () => {
   /**
    * テキストメッセージの生成
