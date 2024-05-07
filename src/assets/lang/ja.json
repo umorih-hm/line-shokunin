@@ -1,4 +1,9 @@
 {
+  "message": {
+    "pushMessage": {
+      "post_success": "ご投稿ありがとうございます！\n以下の投稿を受け付けました。"
+    }
+  },
   "layout": {
     "header": {
       "title": "L I N E 職 人"

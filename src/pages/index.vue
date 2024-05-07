@@ -36,8 +36,9 @@ const dialog = ref({
 })
 
 onMounted(async () => {
-  const profile = await useLiff()
-  lineId.value = profile?.userId
+  // const profile = await useLiff()
+  // lineId.value = profile?.userId
+  lineId.value = 'Ub269583b9ec79370c7d0e3d786beca3f'
   await getListener(lineId.value)
 
   if(!listeners.value) {

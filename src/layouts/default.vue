@@ -26,6 +26,7 @@ v-app
 </template>
 
 <script setup lang="ts">
+const lineId = useState('lineId', () => '') // line のユーザーID
 const userId = useState('userId', () => '')
 const i18n = useI18n()
 const footerMenus = [
@@ -35,7 +36,7 @@ const footerMenus = [
 ]
 
 onMounted(async () => {
-  if(!userId.value) return navigateTo('/')
+  if(!userId.value || !lineId.value) return navigateTo('/')
 })
 </script>
 

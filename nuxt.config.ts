@@ -25,7 +25,9 @@ export default defineNuxtConfig({
     databaseIdListener: process.env.DATABASE_ID_LISTENER,
     databaseIdOtayori: process.env.DATABASE_ID_OTAYORI,
     databaseIdMailTheme: process.env.DATABASE_ID_MAIL_THEME,
-    liffId: process.env.LIFF_ID
+    liffId: process.env.LIFF_ID,
+    channelAccessToken: process.env.CHANNEL_ACCESSTOKEN,
+    channelSecretId: process.env.CHANNEL_SECRET_ID
   },
   i18n: {
     defaultLocale: 'ja',

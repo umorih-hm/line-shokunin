@@ -82,12 +82,19 @@ const i18n = useI18n()
 const config = useConfig()
 const route = useRoute()
 const userId = route.params.id
+const lineId = useState('lineId', () => '') // line のユーザーID
 
 const {
   mailTheme,
   getMailTheme,
   createOtayori
 } = useDatabase()
+
+const {
+  createTextMessage,
+  createFlexMessage,
+  pushMessages
+} = usePushMessage()
 
 // ref
 const form = ref({
@@ -108,10 +115,20 @@ const loading = ref({
 })
 const content = ref("")
 const contentArea = ref()
+const messages = ref(<{}>[])
 
 // computed
+const mailThemeTitle = computed(() => {
+  let title
+  if(mailTheme.value) {
+    mailTheme.value.forEach((theme) => {
+      if(theme.value === form.value.theme) title = theme.title
+    })
+  }
+  return title
+})
 const mailThemeNavigation = computed(() => {
-  let navigation;
+  let navigation
   if(mailTheme.value) {
     mailTheme.value.forEach((theme) => {
       if(theme.value === form.value.theme) navigation = theme.navigation
@@ -136,6 +153,10 @@ const submit = async() => {
     dialog.value.sendForm = false
     label.value.resultSendingForm = i18n.t('dialog.result_sending_form.navigation.success')
     dialog.value.resultSendingForm = true
+
+    messages.value.push(createTextMessage(i18n.t('message.pushMessage.post_success')))
+    messages.value.push((await createFlexMessage(mailThemeTitle.value, form.value.title, content.value)).flexMessage)
+    await pushMessages(lineId.value, messages.value)
   } catch(e: any) {
     console.log('エラー', e)
 
