@@ -56,7 +56,7 @@ v-container.py-0
         color="green"
         rounded="pill"
         height="40px"
-        :disabled="!form.theme || !form.children"
+        :disabled="!form.theme || !form.title || !content"
         @click="dialog.sendForm = true"
       ) {{ $t('button.send') }}
 
