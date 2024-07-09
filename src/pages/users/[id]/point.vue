@@ -1,5 +1,20 @@
 <template lang="pug">
-v-container
+// 初期化ローディング
+v-container(
+  v-if="loading.init"
+  fluid
+)
+  v-card.h-100.d-flex.justify-center.align-center(
+    color="#00000000"
+    variant="flat"
+  )
+    v-progress-circular(
+      color="primary"
+      size="60"
+      indeterminate
+    )
+
+v-container(v-else)
   // 獲得ポイント
   v-row.d-flex.flex-row.justify-center
     v-col.d-flex.flex-column(cols="6")
@@ -41,30 +56,34 @@ v-container
 </template>
 
 <script setup lang="ts">
-const lineId = useState('lineId', () => '')
+const lineId = useState('lineId', () => '');
 
-const {
-  listeners,
-  getListener,
-} = useDatabase()
+const { listeners, getListener } = useDatabase();
 
 const dialog = ref({
-  createUser: false
-})
+  createUser: false,
+});
 const form = ref({
   postCount: 0,
   passedCount: 0,
-  points: 0
-})
+  points: 0,
+});
+const loading = ref({
+  init: true,
+});
 
 onMounted(async () => {
-  if(!lineId.value) return navigateTo('/')
+  if (!lineId.value) return navigateTo('/');
 
-  await getListener(lineId.value)
-  form.value.postCount = listeners.value.postCount
-  form.value.passedCount = listeners.value.passedCount
-  form.value.points = listeners.value.points
-})
+  try {
+    await getListener(lineId.value);
+    form.value.postCount = listeners.value.postCount;
+    form.value.passedCount = listeners.value.passedCount;
+    form.value.points = listeners.value.points;
+  } finally {
+    loading.value.init = false;
+  }
+});
 </script>
 
 <style scoped lang="sass">

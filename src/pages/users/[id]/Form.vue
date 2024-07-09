@@ -1,5 +1,20 @@
 <template lang="pug">
-v-container.py-0
+// 初期化ローディング
+v-container(
+  v-if="loading.init"
+  fluid
+)
+  v-card.h-100.d-flex.justify-center.align-center(
+    color="#00000000"
+    variant="flat"
+  )
+    v-progress-circular(
+      color="primary"
+      size="60"
+      indeterminate
+    )
+
+v-container.py-0(v-else)
   v-row.d-flex.flex-row.justify-center
     // メールテーマ
     v-col(cols="12")
@@ -75,124 +90,136 @@ dialog-result-sending-form(
 </template>
 
 <script setup lang="ts">
-import type EasyMde from "easymde"
-let mde: InstanceType<typeof EasyMde> | null = null
+import type EasyMde from 'easymde';
+let mde: InstanceType<typeof EasyMde> | null = null;
 
-const i18n = useI18n()
-const config = useConfig()
-const route = useRoute()
-const userId = route.params.id
-const lineId = useState('lineId', () => '') // line のユーザーID
+const i18n = useI18n();
+const config = useConfig();
+const route = useRoute();
+const userId = route.params.id;
+const lineId = useState('lineId', () => ''); // line のユーザーID
 
-const {
-  mailTheme,
-  getMailTheme,
-  createOtayori
-} = useDatabase()
+const { mailTheme, getMailTheme, createOtayori } = useDatabase();
 
-const {
-  createTextMessage,
-  createFlexMessage,
-  pushMessages
-} = usePushMessage()
+const { createTextMessage, createFlexMessage, pushMessages } = usePushMessage();
 
 // ref
 const form = ref({
   theme: '',
   title: '',
   userId: '',
-  children: {}
-})
+  children: {},
+});
 const dialog = ref({
   sendForm: false,
-  resultSendingForm: false
-})
+  resultSendingForm: false,
+});
 const label = ref({
-  resultSendingForm: ''
-})
+  resultSendingForm: '',
+});
 const loading = ref({
-  sendForm: false
-})
-const content = ref("")
-const contentArea = ref()
-const messages = ref(<{}>[])
+  sendForm: false,
+  init: true,
+});
+const content = ref('');
+const contentArea = ref();
+const messages = ref(<{}>[]);
 
 // computed
 const mailThemeTitle = computed(() => {
-  let title
-  if(mailTheme.value) {
+  let title;
+  if (mailTheme.value) {
     mailTheme.value.forEach((theme) => {
-      if(theme.value === form.value.theme) title = theme.title
-    })
+      if (theme.value === form.value.theme) title = theme.title;
+    });
   }
-  return title
-})
+  return title;
+});
 const mailThemeNavigation = computed(() => {
-  let navigation
-  if(mailTheme.value) {
+  let navigation;
+  if (mailTheme.value) {
     mailTheme.value.forEach((theme) => {
-      if(theme.value === form.value.theme) navigation = theme.navigation
-    })
+      if (theme.value === form.value.theme) navigation = theme.navigation;
+    });
   }
-  return navigation
-})
+  return navigation;
+});
 
 // methods
-const submit = async() => {
-  loading.value.sendForm = true
-  if(!form.value.theme || !form.value.title) return
+const submit = async () => {
+  loading.value.sendForm = true;
+  if (!form.value.theme || !form.value.title) return;
 
   try {
-    const block = useMdToNotion(content.value)
-    form.value.children = block
-    form.value.userId = userId
+    const block = useMdToNotion(content.value);
+    form.value.children = block;
+    form.value.userId = userId;
 
-    await createOtayori(unref(form))
+    await createOtayori(unref(form));
 
-    config.remove('smde_mde-autosave')
-    dialog.value.sendForm = false
-    label.value.resultSendingForm = i18n.t('dialog.result_sending_form.navigation.success')
-    dialog.value.resultSendingForm = true
+    config.remove('smde_mde-autosave');
+    dialog.value.sendForm = false;
+    label.value.resultSendingForm = i18n.t(
+      'dialog.result_sending_form.navigation.success'
+    );
+    dialog.value.resultSendingForm = true;
 
-    messages.value.push(createTextMessage(i18n.t('message.pushMessage.post_success')))
-    messages.value.push((await createFlexMessage(mailThemeTitle.value, form.value.title, content.value)).flexMessage)
-    await pushMessages(lineId.value, messages.value)
-  } catch(e: any) {
-    console.log('エラー', e)
+    messages.value.push(
+      createTextMessage(i18n.t('message.pushMessage.post_success'))
+    );
+    messages.value.push(
+      (
+        await createFlexMessage(
+          mailThemeTitle.value,
+          form.value.title,
+          content.value
+        )
+      ).flexMessage
+    );
+    await pushMessages(lineId.value, messages.value);
+  } catch (e: any) {
+    console.log('エラー', e);
 
-    label.value.resultSendingForm = i18n.t('dialog.result_sending_form.navigation.error')
-    dialog.value.resultSendingForm = true
+    label.value.resultSendingForm = i18n.t(
+      'dialog.result_sending_form.navigation.error'
+    );
+    dialog.value.resultSendingForm = true;
   } finally {
-    loading.value.sendForm = false
+    loading.value.sendForm = false;
   }
-}
+};
 
 /**
  * ホームへ戻る
  */
-const navigateToHome = () => navigateTo(`/users/${userId}`)
+const navigateToHome = () => navigateTo(`/users/${userId}`);
 
 onMounted(async () => {
-  await getMailTheme() // メールテーマの取得
-  if(route.query.theme) form.value.theme = route.query.theme
+  try {
+    await getMailTheme(); // メールテーマの取得
+    if (route.query.theme) form.value.theme = route.query.theme;
+  } finally {
+    loading.value.init = false;
+  }
 
   // easeMde の初期化
-  const EasyMde = (await import("easymde")).default
+  const EasyMde = (await import('easymde')).default;
   mde = new EasyMde({
     element: contentArea.value.$el,
-    autosave: {            //自動保存
+    autosave: {
+      //自動保存
       enabled: true,
       delay: 1000,
-      uniqueId: 'mde-autosave' //ローカルストレージのキーに使用
+      uniqueId: 'mde-autosave', //ローカルストレージのキーに使用
     },
-  })
-  content.value = mde.value() // 自動保存されている文章を格納
-  mde.codemirror.on("change", () => {
+  });
+  content.value = mde.value(); // 自動保存されている文章を格納
+  mde.codemirror.on('change', () => {
     if (mde) {
-      content.value = mde.value()
+      content.value = mde.value();
     }
-  })
-})
+  });
+});
 </script>
 
 <style scoped lang="sass">

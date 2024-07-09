@@ -1,5 +1,20 @@
 <template lang="pug">
-v-container.pt-0.pb-8
+// 初期化ローディング
+v-container(
+  v-if="loading.init"
+  fluid
+)
+  v-card.h-100.d-flex.justify-center.align-center(
+    color="#00000000"
+    variant="flat"
+  )
+    v-progress-circular(
+      color="primary"
+      size="60"
+      indeterminate
+    )
+
+v-container.pt-0.pb-8(v-else)
   v-row.d-flex.flex-row.justify-center
     // ラジオネーム
     v-col(cols="12")
@@ -48,32 +63,36 @@ dialog-update-user(
 </template>
 
 <script setup lang="ts">
-const route = useRoute()
-const userId = route.params.id
-const lineId = useState('lineId', () => '')
+const route = useRoute();
+const userId = route.params.id;
+const lineId = useState('lineId', () => '');
 
-const {
-  listeners,
-  getListener,
-} = useDatabase()
+const { listeners, getListener } = useDatabase();
 
 const form = ref({
   radioName: '',
   gender: '',
   age: null,
-})
+});
 const dialog = ref({
   createUser: false,
-})
+});
+const loading = ref({
+  init: true,
+});
 
 onMounted(async () => {
-  if(!lineId.value) return navigateTo('/')
+  if (!lineId.value) return navigateTo('/');
 
-  await getListener(lineId.value)
-  form.value.radioName = listeners.value.radioName
-  form.value.gender = listeners.value.gender
-  form.value.age = listeners.value.age
-})
+  try {
+    await getListener(lineId.value);
+    form.value.radioName = listeners.value.radioName;
+    form.value.gender = listeners.value.gender;
+    form.value.age = listeners.value.age;
+  } finally {
+    loading.value.init = false;
+  }
+});
 </script>
 
 <style scoped lang="sass"></style>
