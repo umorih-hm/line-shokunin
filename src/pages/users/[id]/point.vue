@@ -1,20 +1,15 @@
 <template lang="pug">
-// 初期化ローディング
-v-container(
-  v-if="loading.init"
-  fluid
-)
-  v-card.h-100.d-flex.justify-center.align-center(
-    color="#00000000"
-    variant="flat"
+v-container
+  v-overlay(
+    :model-value="loading.init"
+    :persistent="true"
+    class="align-center justify-center"
   )
     v-progress-circular(
       color="primary"
       size="60"
       indeterminate
     )
-
-v-container(v-else)
   // 獲得ポイント
   v-row.d-flex.flex-row.justify-center
     v-col.d-flex.flex-column(cols="6")

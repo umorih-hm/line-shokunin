@@ -1,20 +1,15 @@
 <template lang="pug">
-// 初期化ローディング
-v-container(
-  v-if="loading.init"
-  fluid
-)
-  v-card.h-100.d-flex.justify-center.align-center(
-    color="#00000000"
-    variant="flat"
+v-container.py-0
+  v-overlay(
+    :model-value="loading.init"
+    :persistent="true"
+    class="align-center justify-center"
   )
     v-progress-circular(
       color="primary"
       size="60"
       indeterminate
     )
-
-v-container.py-0(v-else)
   v-row.d-flex.flex-row.justify-center
     // メールテーマ
     v-col(cols="12")
