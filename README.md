@@ -71,6 +71,6 @@ LIFF アプリで取得したユーザー情報やお便りの情報は、`Notio
 ## YouTube
 
 本サービスは [LINE DC BOT AWARDS 2024](https://lineapiusecase.com/ja/community/linedc-award-2024.html)への応募作品です。  
-入賞はできませんでしたが、下記の YouTube でサービスについて説明していますのでぜひご覧ください！
+入賞はできませんでしたが、下記の動画でサービスについて説明していますのでぜひご覧ください！
 
 https://youtu.be/9GbDWpXRAD4
