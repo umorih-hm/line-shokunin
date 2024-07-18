@@ -1,75 +1,76 @@
-# Nuxt 3 Minimal Starter
+# LINE 職人
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+## サービス概要
 
-## Setup
+![alt text](/src/docs/image.png)
 
-Make sure to install the dependencies:
+リスナーとラジオ番組をつなぐ ”令和のハガキ職人”向け LINE BOT  
+その名も「LINE 職人」
 
-```bash
-# npm
-npm install
+LINE 上のミニアプリからラジオ番組へお便りを投稿できます。  
+はがきやメールに替わる新しい選択肢を提供します。
 
-# pnpm
-pnpm install
+## コアバリュー
 
-# yarn
-yarn install
+![alt text](</src/docs/line bot award 応募資料.png>)
 
-# bun
-bun install
-```
+### ① 身近な SNS で気軽にラジオ投稿
 
-## Development Server
+ラジオに投稿すると言うとメールやはがきを送るというイメージが湧くかと思います。  
+しかし、わざわざはがきを準備したり、メールアドレスを入力したりなど、投稿する側の手間がかかるため投稿へのハードルがあるように感じます。
 
-Start the development server on `http://localhost:3000`:
+LINE 職人では LINE 上で LINE 職人のアカウントと友だちになるだけで投稿を始めることができます。  
+普段使っている身近な SNS ツールで気軽にラジオへ投稿できるのが最大のメリットです！
 
-```bash
-# npm
-npm run dev
+### ② 番組の最新情報を受け取れる
 
-# pnpm
-pnpm run dev
+LINE 職人のアカウントと友だちになると、番組からの最新情報を受け取ることができます。
 
-# yarn
-yarn dev
+### ③ ポイント獲得で投稿へのモチベーションを上げる
 
-# bun
-bun run dev
-```
+「投稿しても、投稿が採用されるかわからないからモチベーションがわかない。」
 
-## Production
+LINE 職人では投稿すればするほどポイントを獲得できます。  
+ポイント獲得により、投稿するモチベーションが上がって投稿数の増加を期待できます。
 
-Build the application for production:
+## システム構成
 
-```bash
-# npm
-npm run build
+![](/src/docs/システム構成図.drawio.png)
 
-# pnpm
-pnpm run build
+### Bot サーバー
 
-# yarn
-yarn build
+Bot サーバーは LINE へのメッセージ送信機能を担っています。
 
-# bun
-bun run build
-```
+`Google Apps Script` をサーバーとして利用し、LINE が提供する `Messaging API` を利用して LINE にメッセージを送信します。
 
-Locally preview production build:
+### LIFF アプリ
 
-```bash
-# npm
-npm run preview
+ラジオへの投稿機能や、獲得したポイントなどの閲覧機能を LINE LIFF アプリにて提供します。
 
-# pnpm
-pnpm run preview
+LIFF アプリは `NuxtJS` という `Vue.js` のフレームワークを用いて開発しています。  
+また、`Vercel` にデプロイしてホスティングしています。。
 
-# yarn
-yarn preview
+※LIFF アプリについては、以下をご参照ください。  
+https://developers.line.biz/ja/docs/liff/overview/#line-api-use-case
 
-# bun
-bun run preview
-```
+### Notion
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+LIFF アプリで取得したユーザー情報やお便りの情報は、`Notion API` を用いて Notion に送信されます。
+
+お便りを募集する側のラジオ番組管理者などは、Notion 上で集まったお便りなどを閲覧できます。
+
+## ご投稿お待ちしております！
+
+現在サービスのリリース（商用利用など）は行っておりません。
+
+テスト版は下記 QR コードから友だち追加して利用できますので、ぜひ友だちになって自由にお便りを投稿していただけると嬉しいです！  
+※ LINE 職人へのご意見など、励みになりますのでご投稿お待ちしております！
+
+![alt text](/src/docs/image-1.png)
+
+## YouTube
+
+本サービスは [LINE DC BOT AWARDS 2024](https://lineapiusecase.com/ja/community/linedc-award-2024.html)への応募作品です。  
+入賞はできませんでしたが、下記の YouTube でサービスについて説明していますのでぜひご覧ください！
+
+https://youtu.be/9GbDWpXRAD4
